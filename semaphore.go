@@ -9,21 +9,21 @@ import (
 const requestCount = 5
 
 type Semaphore struct {
-	semaCh chan struct{}
+	controlChannel chan struct{}
 }
 
 func NewSemaphore(maxRequests int) *Semaphore {
 	return &Semaphore{
-		semaCh: make(chan struct{}, maxRequests),
+		controlChannel: make(chan struct{}, maxRequests),
 	}
 }
 
 func (s *Semaphore) Acquire() {
-	s.semaCh <- struct{}{}
+	s.controlChannel <- struct{}{}
 }
 
 func (s *Semaphore) Release() {
-	<-s.semaCh
+	<-s.controlChannel
 }
 
 func main() {

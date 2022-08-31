@@ -45,6 +45,7 @@ func fanOut(doneChannel chan struct{}, inputChannel chan int) []chan int {
 
 		go func() {
 			defer close(workerChannel)
+
 			for data := range inputChannel {
 				result := data + 1 // actual operation
 				select {
