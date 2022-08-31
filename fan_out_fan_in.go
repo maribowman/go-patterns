@@ -30,9 +30,9 @@ func main() {
 	mergeChannel := fanIn(doneChannel, channels...)
 
 	var index int
-	for randomNumber := range randomOperation(doneChannel, mergeChannel) {
+	for result := range randomOperation(doneChannel, mergeChannel) {
 		index++
-		fmt.Printf("run %d: %d\n", index, randomNumber)
+		fmt.Println(fmt.Sprintf("run %d: %d", index, result))
 	}
 }
 
